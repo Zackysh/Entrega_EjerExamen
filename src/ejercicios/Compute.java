@@ -27,10 +27,9 @@ public class Compute {
 	 */
 	public static int[] diagonal(int[][] m) {
 
-		int row = m.length, col = m[0].length;
 		int diagonal[];
 
-		if (row == col) {
+		if (m.length == m[0].length) {
 			diagonal = new int[m.length];
 			for (int i = 0; i < diagonal.length; i++) {
 				diagonal[i] = m[i][i];
@@ -56,13 +55,12 @@ public class Compute {
 	 */
 	public static int[] diagonal(int[][] m, boolean esSecundaria) {
 
-		int row = m.length, col = m[0].length;
 		int diagonal[];
 
-		if (row == col && esSecundaria == true) {
+		if (m.length == m[0].length && esSecundaria == true) {
 			diagonal = new int[m.length];
 			for (int i = 0; i < diagonal.length; i++) {
-				diagonal[i] = m[i][row - 1 - i];
+				diagonal[i] = m[i][m.length - 1 - i];
 			}
 			return diagonal;
 		} else {
@@ -128,6 +126,34 @@ public class Compute {
 
 		return column;
 	}
+	
+	/**
+	 * Method that extracts a subMatrix from a given matrix.
+	 * 
+	 * @param m Matrix you want to get a subMatrix.
+	 * @param chossenRows Array that contains desired row index.
+	 * @param chossenCols Array that contains desired col index.
+	 * @return subMatrix SubMatrix from original matrix.
+	 */
+	public static int[][] submatriz(int[][] m, int[] chossenRows, int[] chossenCols) {
+		
+		int[][] subMatrix = new int[chossenRows.length][chossenCols.length];
+		
+		int rowIt = 0;
+		int colIt = 0;
+		for (int i = 0; i < subMatrix.length; i++) {
+			for (int j = 0; j < subMatrix[0].length; j++) {
+				if(rowIt < chossenRows.length && colIt < chossenCols.length) {
+					subMatrix[i][j] = m[chossenRows[rowIt]][chossenCols[colIt++]];
+				}
+			}
+			rowIt++;
+			colIt = 0;
+		}
+		
+		return subMatrix;
+	}
+		
 
 	// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 	/**
@@ -152,11 +178,11 @@ public class Compute {
 	 * @return max MaxValue of m.
 	 */
 	private static int computeMax(int[][] m) {
-
-		int row = m.length, col = m[0].length, max = m[0][0];
+		
+		int max = 0;
 		// Compute max value.
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < col; j++) {
+		for (int i = 0; i < m.length; i++) {
+			for (int j = 0; j < m[0].length; j++) {
 				if (m[i][j] > max)
 					max = m[i][j];
 			}
@@ -173,10 +199,10 @@ public class Compute {
 	 */
 	private static int computeMin(int[][] m) {
 
-		int row = m.length, col = m[0].length, min = m[0][0];
+		int min = m[0][0];
 		// Compute min value.
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < col; j++) {
+		for (int i = 0; i < m.length; i++) {
+			for (int j = 0; j < m[0].length; j++) {
 				if (m[i][j] < min)
 					min = m[i][j];
 			}
@@ -211,12 +237,11 @@ public class Compute {
 	 */
 	private static double computeVariancePopulation(int[][] m) {
 
-		int row = m.length, col = m[0].length;
 		double mean = computeMean(m), squaredDiff = 0;
 
 		// 1 - Sum squared differences with mean.
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < col; j++) {
+		for (int i = 0; i < m.length; i++) {
+			for (int j = 0; j < m[0].length; j++) {
 				squaredDiff += (m[i][j] - mean) * (m[i][j] - mean);
 			}
 		}
@@ -235,18 +260,17 @@ public class Compute {
 	@SuppressWarnings("unused")
 	private static double computeVarianceSample(int[][] m) {
 
-		int row = m.length, col = m[0].length;
 		double mean = computeMean(m), squaredDiff = 0;
 
 		// 1 - Sum squared differences with mean.
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < col; j++) {
+		for (int i = 0; i < m.length; i++) {
+			for (int j = 0; j < m[0].length; j++) {
 				squaredDiff += (m[i][j] - mean) * (m[i][j] - mean);
 			}
 		}
 
 		// 2 - Variance equals to squared diff slash number of elements.
-		return squaredDiff / (row * col - 1);
+		return squaredDiff / (m.length * m[0].length - 1);
 	}
 
 	/**
@@ -256,16 +280,17 @@ public class Compute {
 	 * @return mean Mean of m.
 	 */
 	private static double computeMean(int[][] m) {
+		
 		double mean;
-		int row = m.length, col = m[0].length, aux = 0;
+		int aux = 0;
 
 		// Compute mean (average) - sum of elements slash number of elements.
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < col; j++) {
+		for (int i = 0; i < m.length; i++) {
+			for (int j = 0; j < m[0].length; j++) {
 				aux += m[i][j];
 			}
 		}
-		mean = (double) aux / (row * col);
+		mean = (double) aux / (m.length * m[0].length);
 		return mean;
 	}
 
@@ -275,7 +300,7 @@ public class Compute {
 	 * @param m
 	 */
 	@SuppressWarnings("unused")
-	private static void rotate90Clockwise(int[][] m) {
+	public static int[][] rotate90Clockwise(int[][] m) {
 
 		int row = m[0].length; // Total columns of Original Matrix
 		int col = m.length; // Total rows of Original Matrix
@@ -288,6 +313,7 @@ public class Compute {
 			}
 		}
 
+		return rotatedMatrix;
 	}
-
+	
 }
