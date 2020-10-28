@@ -7,8 +7,8 @@ import java.util.Arrays;
  * from unidimensional and bidimensional Arrays.
  * 
  * <p>
- * Methods in this class all throw {@code java.lang.NullPointerException} if the
- * specified array reference is null.
+ * Methods in this class all will not throw Exceptions if the specified array
+ * reference is null. Instead, null will be returned.
  * 
  * @author Adrián Garrido Blanco
  *
@@ -17,55 +17,50 @@ public class Compute {
 
 	/**
 	 * Method that extracts the main diagonal from a square matrix.
+	 * <p>
+	 * If the condition is not met (matrix must be square), an empty matrix is
+	 * returned.
 	 * 
 	 * @param m Matrix from which its main diagonal will be obtained.
 	 * 
-	 * @throws java.lang.NullPointerException if given isn't square. it causes a
-	 *                                        null reference.
-	 * @return diagonal IF m is square.
-	 * @return null IF m isn't square.
+	 * @return diagonal If m is square.
 	 */
 	public static int[] diagonal(int[][] m) {
 
-		int diagonal[];
+		int diagonal[] = new int[m.length];
 
 		if (m.length == m[0].length) {
-			diagonal = new int[m.length];
 			for (int i = 0; i < diagonal.length; i++) {
 				diagonal[i] = m[i][i];
 			}
 			return diagonal;
-		} else {
-			System.out.println("Solo las matrices cuadradas tienen diagonal.");
-			return null;
 		}
+
+		return null;
 	}
 
 	/**
 	 * Method that extracts a secondary diagonal from a square matrix.
+	 * <p>
+	 * If the condition is not met (matrix must be square), an empty matrix is
+	 * returned.
 	 * 
 	 * @param m            Matrix from which its secondary diagonal will be
 	 *                     obtained.
 	 * @param esSecundaria Boolean that manage if diagonal is secondary or not.
 	 * 
-	 * @throws java.lang.NullPointerException If given matrix isn't square.
-	 * 
-	 * @return diagonal IF m is square.
-	 * @return null IF m isn't square.
+	 * @return diagonal If m is square.
 	 */
 	public static int[] diagonal(int[][] m, boolean esSecundaria) {
 
-		int diagonal[];
+		int diagonal[] = new int[m.length];
 
 		if (m.length == m[0].length && esSecundaria == true) {
-			diagonal = new int[m.length];
 			for (int i = 0; i < diagonal.length; i++) {
 				diagonal[i] = m[i][m.length - 1 - i];
 			}
-			return diagonal;
-		} else {
-			return null;
 		}
+		return diagonal;
 	}
 
 	/**
@@ -89,73 +84,117 @@ public class Compute {
 	/**
 	 * Given an array m, it will return, whenever possible, the chosen row from the
 	 * array indicated by the index parameter.
+	 * <p>
+	 * If the condition is not met (index in bounds of m.lenght), an empty array is
+	 * returned.
 	 * 
 	 * @param m     Matrix you want to get the row from.
 	 * @param index Index used to locate desired row.
 	 * 
-	 * @throws java.lang.ArrayIndexOutOfBoundsException if you specify an index out
-	 *                                                  of range.
 	 * @return aux Array that contains desired row.
 	 */
 	public static int[] getFila(int[][] m, int index) {
 
-		int aux[] = Arrays.copyOf(m[index], m[index].length);
+		int aux[] = new int[m[0].length];
+		if (index < m.length) {
+			aux = Arrays.copyOf(m[index], m[index].length);
+		}
 
 		return aux;
-
 	}
 
 	/**
 	 * Given an array m, it will return, whenever possible, the chosen column from
 	 * the array indicated by the index parameter.
+	 * <p>
+	 * If condition is not met (index in bounds of m[0]-lenght), an empty array is
+	 * returned.
 	 * 
 	 * @param m     Matrix you want to get the column from.
 	 * @param index Index used to locate desired column.
-	 * 
-	 * @throws java.lang.ArrayIndexOutOfBoundsException if you specify an index out
-	 *                                                  of range.
-	 * @return
+	 *
+	 * @return column Array that contains desired c olumn.
 	 */
-	static int[] getColumna(int m[][], int index) {
+	public static int[] getColumna(int m[][], int index) {
 
 		int column[] = new int[m.length];
 
-		for (int i = 0; i < column.length; i++) {
-			column[i] = m[i][index];
+		if (index < m[0].length) {
+			for (int i = 0; i < column.length; i++) {
+				column[i] = m[i][index];
+			}
 		}
-
 		return column;
 	}
-	
+
 	/**
 	 * Method that extracts a subMatrix from a given matrix.
 	 * 
-	 * @param m Matrix you want to get a subMatrix.
+	 * @param m           Matrix you want to get a subMatrix.
 	 * @param chossenRows Array that contains desired row index.
 	 * @param chossenCols Array that contains desired col index.
-	 * @return subMatrix SubMatrix from original matrix.
+	 * 
+	 * @returns subMatrix SubMatrix from original matrix.
+	 * @returns null If any of chossenRows or chossenCols are out of bounds of m.
 	 */
 	public static int[][] submatriz(int[][] m, int[] chossenRows, int[] chossenCols) {
-		
 		int[][] subMatrix = new int[chossenRows.length][chossenCols.length];
-		
+
 		int rowIt = 0;
 		int colIt = 0;
+		
 		for (int i = 0; i < subMatrix.length; i++) {
 			for (int j = 0; j < subMatrix[0].length; j++) {
-				if(rowIt < chossenRows.length && colIt < chossenCols.length) {
-					subMatrix[i][j] = m[chossenRows[rowIt]][chossenCols[colIt++]];
+				
+				if (rowIt < chossenRows.length && colIt < chossenCols.length) {
+					
+					if (chossenRows[rowIt] < m.length && chossenCols[colIt] < m[0].length)						
+						subMatrix[i][j] = m[chossenRows[rowIt]][chossenCols[colIt++]];
+					
+					else {
+						
+						if (chossenRows[rowIt] >= m.length && chossenCols[colIt] < m[0].length)
+							System.out.println(chossenRows[rowIt] + " row index is not on bounds.");
+						if (chossenRows[rowIt] < m.length && chossenCols[colIt] >= m[0].length)
+							System.out.println(chossenCols[colIt] + " col index is not on bounds.");
+						
+						return null;
+					}
 				}
 			}
 			rowIt++;
 			colIt = 0;
 		}
-		
 		return subMatrix;
 	}
-		
 
-	// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	/**
+	 * Method that multiply two matrix if they are compatible. 
+	 * <p>
+	 * If the condition is not met (matrix dimensions must be compatible), an empty matrix is returned.
+	 * 
+	 * @param m1 First matrix.
+	 * @param m2 Second matrix.
+	 * @return sum Multiplication outcome.
+	 */
+	public static int[][] multiplica(int[][] m1, int[][] m2) {
+
+		int[][] sum = new int[m1.length][m2[0].length];
+
+		if (m1[0].length == m2.length) {
+			
+			for (int i = 0; i < sum.length; i++) {
+				for (int j = 0; j < sum[0].length; j++) {
+					for (int k = 0; k < m1[0].length; k++) {
+						
+						sum[i][j] += m1[i][k] * m2[k][j];
+					}
+				}
+			}
+		}
+		return sum;
+	}
+
 	/**
 	 * Method that compute MinValue, MaxValue, Mean, StandardDeviation and Variance
 	 * from a matrix.
@@ -165,7 +204,7 @@ public class Compute {
 	 */
 	public static double[] extraerEstadisticas(int[][] m) {
 
-		double[] stats = { computeMin(m), computeMax(m), computeMean(m), computeVariancePopulation(m),
+		double[] stats = { computeMin(m), computeMax(m), computeMean(m), computeVarianceOfPopulation(m),
 				computeStandardDeviation(m) };
 
 		return stats;
@@ -178,16 +217,16 @@ public class Compute {
 	 * @return max MaxValue of m.
 	 */
 	private static int computeMax(int[][] m) {
-		
+
 		int max = 0;
 		// Compute max value.
 		for (int i = 0; i < m.length; i++) {
 			for (int j = 0; j < m[0].length; j++) {
+				
 				if (m[i][j] > max)
 					max = m[i][j];
 			}
 		}
-
 		return max;
 	}
 
@@ -203,11 +242,11 @@ public class Compute {
 		// Compute min value.
 		for (int i = 0; i < m.length; i++) {
 			for (int j = 0; j < m[0].length; j++) {
+				
 				if (m[i][j] < min)
 					min = m[i][j];
 			}
 		}
-
 		return min;
 	}
 
@@ -224,7 +263,7 @@ public class Compute {
 	 */
 	private static double computeStandardDeviation(int[][] m) {
 		// StandardDeviation equals to square root of Variance.
-		return Math.sqrt(computeVariancePopulation(m));
+		return Math.sqrt(computeVarianceOfPopulation(m));
 	}
 
 	/**
@@ -235,7 +274,7 @@ public class Compute {
 	 * @param m Matrix of which you want to know its Variance.
 	 * @return ValueOf Variance of m.
 	 */
-	private static double computeVariancePopulation(int[][] m) {
+	private static double computeVarianceOfPopulation(int[][] m) {
 
 		double mean = computeMean(m), squaredDiff = 0;
 
@@ -257,8 +296,8 @@ public class Compute {
 	 * @param m Matrix of which you want to know its Variance.
 	 * @return ValueOf Variance of m.
 	 */
-	@SuppressWarnings("unused")
-	private static double computeVarianceSample(int[][] m) {
+
+	public static double computeVarianceOfSample(int[][] m) {
 
 		double mean = computeMean(m), squaredDiff = 0;
 
@@ -280,13 +319,13 @@ public class Compute {
 	 * @return mean Mean of m.
 	 */
 	private static double computeMean(int[][] m) {
-		
+
 		double mean;
 		int aux = 0;
 
 		// Compute mean (average) - sum of elements slash number of elements.
 		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m[0].length; j++) {
+			for (int j = 0; j < m[0].length; j++) {				
 				aux += m[i][j];
 			}
 		}
@@ -294,12 +333,13 @@ public class Compute {
 		return mean;
 	}
 
+
 	/**
-	 * Experimental method.
-	 * It came from the depths of my inspiration.
-	 * @param m
+	 * Method that rotate a matrix clockwise by 90 degrees.
+	 * 
+	 * @param m Original Matrix.
+	 * @return rotatedMatrix Rotated Matrix clockwise by 90°.
 	 */
-	@SuppressWarnings("unused")
 	public static int[][] rotate90Clockwise(int[][] m) {
 
 		int row = m[0].length; // Total columns of Original Matrix
@@ -312,8 +352,29 @@ public class Compute {
 				rotatedMatrix[j][(col - 1) - i] = m[i][j];
 			}
 		}
-
 		return rotatedMatrix;
 	}
 	
+	/**
+	 * Method that rotate a matrix counter clockwise by 90 degrees.
+	 * 
+	 * @param m Original Matrix.
+	 * 
+	 * @return rotatedMatrix Rotated Matrix counter clockwise by 90°.
+	 */
+	public static int[][] rotated90CounterClockwise(int[][] m) {
+
+		// Rotated Matrix row = Original Matrix col and viceversa.
+		int row = m[0].length;
+		int col = m.length;
+
+		int[][] rotatedMatrix = new int[row][col];
+
+		for (int i = 0; i < m.length; i++) {
+			for (int j = 0; j < m[0].length; j++) {
+				rotatedMatrix[(row - 1) - j][i] = m[i][j];
+			}
+		}
+		return rotatedMatrix;
+	}
 }
