@@ -284,8 +284,10 @@ public class Compute {
 	private static int computeMin(int[][] m) {
 
 		int min = m[0][0];
+		
 		// Compute min value.
 		for (int i = 0; i < m.length; i++) {
+			
 			for (int j = 0; j < m[0].length; j++) {
 
 				if (m[i][j] < min)

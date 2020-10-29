@@ -115,13 +115,13 @@ public class Main {
 		
 		int[] col = Compute.getColumna(matrix, 2);
 		
-		System.out.print("Correct row index 2: ");
+		System.out.print("Correct column index 2: ");
 		
 		printArray(col);
 		
 		col = Compute.getColumna(matrix, 3);
 		
-		System.out.print("Incorrect row index 3: ");
+		System.out.print("Incorrect column index 3: ");
 		
 		printArray(col);
 		
@@ -163,7 +163,7 @@ public class Main {
 		
 		printMatrix(resultado);
 		
-		System.out.println("If the dimensions of the matrices are not compatible: It returns 0-filled matrix.");
+		System.out.println("If the dimensions of matrix are not compatible: It returns 0-filled matrix.");
 		
 		resultado = Compute.multiplica(subMatrix, superMatrix);
 		
@@ -173,11 +173,11 @@ public class Main {
 		
 		double[] stats = Compute.extraerEstadisticas(matrix);
 		
-		System.out.println("1Matrix to analyze:");
+		System.out.println("Matrix to analyze:");
 		
 		printMatrix(matrix);
 		
-		System.out.println("{MinValue, MaxValue, Mean, VarianceOfPopulation, StandardDeviation");
+		System.out.println("{MinValue, MaxValue, Mean, VarianceOfPopulation, StandardDeviation}");
 		
 		printArray(stats);
 		
@@ -191,7 +191,8 @@ public class Main {
 				+ "======================\n"
 				);
 		
-		System.out.println("\nTesting: \"public static int[][] rotate90Clockwise(int[][] m)\"\n"); //>>>>>>>>>> EIGHTH TEST <<<<<<<<<<<<
+		System.out.println("\nTesting: \"public static int[][] rotate90Clockwise(int[][] m)\""); //>>>>>>>>>> EIGHTH TEST <<<<<<<<<<<<
+		System.out.println("Testing: \"public static int[][] rotated90CounterClockwise(int[][] m)\"\n");
 		
 		System.out.println("Initial Matrix:");
 		
