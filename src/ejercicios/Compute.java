@@ -91,13 +91,13 @@ public class Compute {
 	 * returned.
 	 * 
 	 * @param m     Matrix you want to get the row from.
-	 * @param index Index used to locate desired row.
+	 * @param index Index used to locate target row.
 	 * 
 	 * @return aux Array that contains desired row.
 	 */
 	public static int[] getFila(int[][] m, int index) {
 
-		int aux[] = new int[m[0].length]; // Array in which desired row will be stored
+		int aux[] = new int[m[0].length]; // Array in which target row will be stored
 		if (index < m.length) {
 			aux = Arrays.copyOf(m[index], m[index].length); // Store row into array
 		}
@@ -113,9 +113,9 @@ public class Compute {
 	 * returned.
 	 * 
 	 * @param m     Matrix you want to get the column from.
-	 * @param index Index used to locate desired column.
+	 * @param index Index used to locate target column.
 	 *
-	 * @return column Array that contains desired c olumn.
+	 * @return column Array that contains desired column.
 	 */
 	public static int[] getColumna(int m[][], int index) {
 
@@ -133,8 +133,8 @@ public class Compute {
 	 * Method that extracts a subMatrix from a given matrix.
 	 * 
 	 * @param m           Matrix you want to get a subMatrix.
-	 * @param chossenRows Array that contains desired row index.
-	 * @param chossenCols Array that contains desired col index.
+	 * @param chossenRows Array that contains target row index.
+	 * @param chossenCols Array that contains target col index.
 	 * 
 	 * @returns subMatrix SubMatrix from original matrix.
 	 * @returns null If any of chossenRows or chossenCols are out of bounds of m.
@@ -215,8 +215,8 @@ public class Compute {
 	}
 
 	/**
-	 * Method that replaces any specified row of an matrix by a given array that is
-	 * fits the desired matrix.
+	 * Method that replaces any specified row of an matrix by a given array that
+	 * fits the target matrix.
 	 * 
 	 * @param m      Original matrix.
 	 * @param a      Desired row.
@@ -233,6 +233,8 @@ public class Compute {
 	}
 
 	/**
+	 * Method that replaces any specified column of an matrix by a given array that
+	 * fits the target matrix.
 	 * 
 	 * @param m
 	 * @param a
@@ -240,9 +242,11 @@ public class Compute {
 	 */
 	public static void reemplazarColumnaConArray(int m[][], int[] a, int indice) {
 
-		if (indice < m[0].length && a.length < m.length) { // Check if index is in bounds of m[0].length
+		if (indice < m[0].length && a.length == m.length) { // Check if index is in bounds of m[0].length
 															// and if a.length fits m.length
-
+			for (int row = 0; row < m.length; row++) {
+				m[row][indice] = a[row];
+			}
 		}
 
 	}

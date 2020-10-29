@@ -211,21 +211,39 @@ public class Main {
 		
 		System.out.println("\nTesting: \"public static void reemplazarFilaConArray(int m[][], int[] a, int indice)\"\n"); //>>>>>>>>>> NINETH TEST <<<<<<
 		
-		int index = 5;
+		int rowIndex = 2;
+		int colIndex = 2;
 		int[] desiredRow = {3, 7, 1};
+		int[] desiredCol = {9, 2, 3};
 		
 		System.out.println("Initial Matrix:");
 		
 		printMatrix(matrix);
 		
-		System.out.print("Index: " + index + " Desired row: ");
+		System.out.print("Index: " + rowIndex + " Desired row: ");
 		
 		printArray(desiredRow);
 		
-		System.out.println("Final Matrix: ");
+		System.out.println("Final Matrix:");
 		
-		Compute.reemplazarFilaConArray(matrix, desiredRow, index);
+		Compute.reemplazarFilaConArray(matrix, desiredRow, rowIndex);
 		
+		printMatrix(matrix);
+		
+		System.out.println("\nTesting: \"public static void reemplazarColumnaConArray(int m[][], int[] a, int indice)\"\n");
+		
+		System.out.println("Initial Matrix:");
+		
+		printMatrix(matrix);
+		
+		System.out.print("Index: " + colIndex + " Desired col: ");
+		
+		printArray(desiredCol);
+		
+		System.out.println("Final Matrix:");
+		
+		Compute.reemplazarColumnaConArray(matrix, desiredCol, colIndex);
+
 		printMatrix(matrix);
 	}
 }
