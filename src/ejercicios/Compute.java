@@ -29,9 +29,9 @@ public class Compute {
 
 		int diagonal[] = new int[m.length];
 
-		if (m.length == m[0].length) {
+		if (m.length == m[0].length) { // check if m is square
 			for (int i = 0; i < diagonal.length; i++) {
-				diagonal[i] = m[i][i];
+				diagonal[i] = m[i][i]; // get m Main Diagonal
 			}
 			return diagonal;
 		}
@@ -144,11 +144,11 @@ public class Compute {
 		int colIt = 0;
 		
 		for (int i = 0; i < subMatrix.length; i++) {
-			for (int j = 0; j < subMatrix[0].length; j++) {
+			for (int j = 0; j < subMatrix[0].length; j++) { //fill subMatrix with:
 				
-				if (rowIt < chossenRows.length && colIt < chossenCols.length) {
+				if (rowIt < chossenRows.length && colIt < chossenCols.length) { //check if external iterators are in bounds
 					
-					if (chossenRows[rowIt] < m.length && chossenCols[colIt] < m[0].length)						
+					if (chossenRows[rowIt] < m.length && chossenCols[colIt] < m[0].length) //
 						subMatrix[i][j] = m[chossenRows[rowIt]][chossenCols[colIt++]];
 					
 					else {
@@ -365,10 +365,10 @@ public class Compute {
 	public static int[][] rotated90CounterClockwise(int[][] m) {
 
 		// Rotated Matrix row = Original Matrix col and viceversa.
-		int row = m[0].length;
-		int col = m.length;
+		int row = m[0].length; //now NumberOfRows are original cols number
+		int col = m.length; //and NumberOfCols are original rows number
 
-		int[][] rotatedMatrix = new int[row][col];
+		int[][] rotatedMatrix = new int[row][col]; //rotated matrix with rotated dimensions
 
 		for (int i = 0; i < m.length; i++) {
 			for (int j = 0; j < m[0].length; j++) {
