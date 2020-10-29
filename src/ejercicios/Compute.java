@@ -10,7 +10,11 @@ import java.util.Arrays;
  * Methods in this class all will not throw Exceptions if the specified array
  * reference is null. Instead, null will be returned.
  * 
+ * <p>
+ * In addition, I have built boards where some specific methods are represented
+ * graphically. Here's where you can find source files:
  * 
+ * https://drive.google.com/drive/folders/1E9DA6kZ3TSBCH0jcSkj4m1y8CLEgXmSb?usp=sharing
  * 
  * @author Adrián Garrido Blanco
  *
