@@ -142,22 +142,23 @@ public class Compute {
 
 		int rowIt = 0;
 		int colIt = 0;
-		
+
 		for (int i = 0; i < subMatrix.length; i++) {
-			for (int j = 0; j < subMatrix[0].length; j++) { //fill subMatrix with:
-				
-				if (rowIt < chossenRows.length && colIt < chossenCols.length) { //check if external iterators are in bounds
-					
+			for (int j = 0; j < subMatrix[0].length; j++) { // fill subMatrix with:
+
+				if (rowIt < chossenRows.length && colIt < chossenCols.length) { // check if external iterators are in
+																				// bounds
+
 					if (chossenRows[rowIt] < m.length && chossenCols[colIt] < m[0].length) //
 						subMatrix[i][j] = m[chossenRows[rowIt]][chossenCols[colIt++]];
-					
+
 					else {
-						
+
 						if (chossenRows[rowIt] >= m.length && chossenCols[colIt] < m[0].length)
 							System.out.println(chossenRows[rowIt] + " row index is not on bounds.");
 						if (chossenRows[rowIt] < m.length && chossenCols[colIt] >= m[0].length)
 							System.out.println(chossenCols[colIt] + " col index is not on bounds.");
-						
+
 						return null;
 					}
 				}
@@ -169,9 +170,10 @@ public class Compute {
 	}
 
 	/**
-	 * Method that multiply two matrix if they are compatible. 
+	 * Method that multiply two matrix if they are compatible.
 	 * <p>
-	 * If the condition is not met (matrix dimensions must be compatible), an empty matrix is returned.
+	 * If the condition is not met (matrix dimensions must be compatible), an empty
+	 * matrix is returned.
 	 * 
 	 * @param m1 First matrix.
 	 * @param m2 Second matrix.
@@ -182,11 +184,11 @@ public class Compute {
 		int[][] sum = new int[m1.length][m2[0].length];
 
 		if (m1[0].length == m2.length) {
-			
+
 			for (int i = 0; i < sum.length; i++) {
 				for (int j = 0; j < sum[0].length; j++) {
 					for (int k = 0; k < m1[0].length; k++) {
-						
+
 						sum[i][j] += m1[i][k] * m2[k][j];
 					}
 				}
@@ -222,7 +224,7 @@ public class Compute {
 		// Compute max value.
 		for (int i = 0; i < m.length; i++) {
 			for (int j = 0; j < m[0].length; j++) {
-				
+
 				if (m[i][j] > max)
 					max = m[i][j];
 			}
@@ -242,7 +244,7 @@ public class Compute {
 		// Compute min value.
 		for (int i = 0; i < m.length; i++) {
 			for (int j = 0; j < m[0].length; j++) {
-				
+
 				if (m[i][j] < min)
 					min = m[i][j];
 			}
@@ -325,14 +327,13 @@ public class Compute {
 
 		// Compute mean (average) - sum of elements slash number of elements.
 		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m[0].length; j++) {				
+			for (int j = 0; j < m[0].length; j++) {
 				aux += m[i][j];
 			}
 		}
 		mean = (double) aux / (m.length * m[0].length);
 		return mean;
 	}
-
 
 	/**
 	 * Method that rotate a matrix clockwise by 90 degrees.
@@ -354,7 +355,7 @@ public class Compute {
 		}
 		return rotatedMatrix;
 	}
-	
+
 	/**
 	 * Method that rotate a matrix counter clockwise by 90 degrees.
 	 * 
@@ -365,13 +366,18 @@ public class Compute {
 	public static int[][] rotated90CounterClockwise(int[][] m) {
 
 		// Rotated Matrix row = Original Matrix col and viceversa.
-		int row = m[0].length; //now NumberOfRows are original cols number
-		int col = m.length; //and NumberOfCols are original rows number
+		int row = m[0].length;
+		int col = m.length; // Since the variable is only used once, it would be optimal to apply its value
+							// directly instead of saving it to a variable.
+							// However, since this is a didactic class, I will not change it.
 
-		int[][] rotatedMatrix = new int[row][col]; //rotated matrix with rotated dimensions
+		int[][] rotatedMatrix = new int[row][col]; // rotated matrix with rotated dimensions
 
-		for (int i = 0; i < m.length; i++) {
+		for (int i = 0; i < m.length; i++) { // traverse original matrix to pick up values
 			for (int j = 0; j < m[0].length; j++) {
+				// fill rotated matrix in necessary positions so that it is correctly rotated
+				// row - 1: last row of rotated matrix
+
 				rotatedMatrix[(row - 1) - j][i] = m[i][j];
 			}
 		}
