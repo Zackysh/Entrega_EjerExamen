@@ -208,5 +208,24 @@ public class Main {
 		int[][] rotatedMatrix90CounterClockWise = Compute.rotated90CounterClockwise(matrix);
 		
 		printMatrix(rotatedMatrix90CounterClockWise);
+		
+		System.out.println("\nTesting: \"public static void reemplazarFilaConArray(int m[][], int[] a, int indice)\"\n"); //>>>>>>>>>> NINETH TEST <<<<<<
+		
+		int index = 5;
+		int[] desiredRow = {3, 7, 1};
+		
+		System.out.println("Initial Matrix:");
+		
+		printMatrix(matrix);
+		
+		System.out.print("Index: " + index + " Desired row: ");
+		
+		printArray(desiredRow);
+		
+		System.out.println("Final Matrix: ");
+		
+		Compute.reemplazarFilaConArray(matrix, desiredRow, index);
+		
+		printMatrix(matrix);
 	}
 }

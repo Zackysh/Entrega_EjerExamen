@@ -10,6 +10,8 @@ import java.util.Arrays;
  * Methods in this class all will not throw Exceptions if the specified array
  * reference is null. Instead, null will be returned.
  * 
+ * 
+ * 
  * @author Adrián Garrido Blanco
  *
  */
@@ -55,9 +57,9 @@ public class Compute {
 
 		int diagonal[] = new int[m.length];
 
-		if (m.length == m[0].length && esSecundaria == true) {
+		if (m.length == m[0].length && esSecundaria == true) { // check if m is square
 			for (int i = 0; i < diagonal.length; i++) {
-				diagonal[i] = m[i][m.length - 1 - i];
+				diagonal[i] = m[i][m.length - 1 - i]; // get m Secondary Diagonal
 			}
 		}
 		return diagonal;
@@ -73,10 +75,10 @@ public class Compute {
 	 */
 	public static int[] invertir(int[] array) {
 
-		int[] aux = new int[array.length];
-		int cont = 0;
-		for (int i = aux.length - 1; i >= 0; i--) {
-			aux[i] = array[cont++];
+		int[] aux = new int[array.length]; // Array in which inverted outcome will be stored
+		int cont = 0; // Original array iterator
+		for (int i = aux.length - 1; i >= 0; i--) { // Traverse new array in reverse
+			aux[i] = array[cont++]; // Traverse original array and assign its value to new array
 		}
 		return aux;
 	}
@@ -85,7 +87,7 @@ public class Compute {
 	 * Given an array m, it will return, whenever possible, the chosen row from the
 	 * array indicated by the index parameter.
 	 * <p>
-	 * If the condition is not met (index in bounds of m.lenght), an empty array is
+	 * If the condition is not met (index in bounds of m.length), an empty array is
 	 * returned.
 	 * 
 	 * @param m     Matrix you want to get the row from.
@@ -95,9 +97,9 @@ public class Compute {
 	 */
 	public static int[] getFila(int[][] m, int index) {
 
-		int aux[] = new int[m[0].length];
+		int aux[] = new int[m[0].length]; // Array in which desired row will be stored
 		if (index < m.length) {
-			aux = Arrays.copyOf(m[index], m[index].length);
+			aux = Arrays.copyOf(m[index], m[index].length); // Store row into array
 		}
 
 		return aux;
@@ -107,7 +109,7 @@ public class Compute {
 	 * Given an array m, it will return, whenever possible, the chosen column from
 	 * the array indicated by the index parameter.
 	 * <p>
-	 * If condition is not met (index in bounds of m[0]-lenght), an empty array is
+	 * If condition is not met (index in bounds of m[0]-length), an empty array is
 	 * returned.
 	 * 
 	 * @param m     Matrix you want to get the column from.
@@ -121,7 +123,7 @@ public class Compute {
 
 		if (index < m[0].length) {
 			for (int i = 0; i < column.length; i++) {
-				column[i] = m[i][index];
+				column[i] = m[i][index]; // Store column into array
 			}
 		}
 		return column;
@@ -210,6 +212,39 @@ public class Compute {
 				computeStandardDeviation(m) };
 
 		return stats;
+	}
+
+	/**
+	 * Method that replaces any specified row of an matrix by a given array that is
+	 * fits the desired matrix.
+	 * 
+	 * @param m      Original matrix.
+	 * @param a      Desired row.
+	 * @param indice Target index to change.
+	 */
+	public static void reemplazarFilaConArray(int m[][], int[] a, int indice) {
+
+		if (indice < m.length && a.length == m[0].length) // Check if index is in bounds of m.length and if
+															// a.length fits m[0].length
+			for (int col = 0; col < a.length; col++) {
+				m[indice][col] = a[col];
+			}
+
+	}
+
+	/**
+	 * 
+	 * @param m
+	 * @param a
+	 * @param indice
+	 */
+	public static void reemplazarColumnaConArray(int m[][], int[] a, int indice) {
+
+		if (indice < m[0].length && a.length < m.length) { // Check if index is in bounds of m[0].length
+															// and if a.length fits m.length
+
+		}
+
 	}
 
 	/**
@@ -376,7 +411,7 @@ public class Compute {
 		for (int i = 0; i < m.length; i++) { // traverse original matrix to pick up values
 			for (int j = 0; j < m[0].length; j++) {
 				// fill rotated matrix in necessary positions so that it is correctly rotated
-				// row - 1: last row of rotated matrix
+				// row - 1: value of rotated matrix row
 
 				rotatedMatrix[(row - 1) - j][i] = m[i][j];
 			}
