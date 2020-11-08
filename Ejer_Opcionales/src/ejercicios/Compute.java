@@ -428,4 +428,41 @@ public class Compute {
 		}
 		return rotatedMatrix;
 	}
+	
+	
+	/**
+	 * Replace row into matrix.
+	 * 
+	 * @param m
+	 * @param array
+	 * @param index
+	 */
+	public static void insertRow(int[][] m, int[] array, int index) {
+		
+		if(index < m.length && index >= 0 && array.length == m[0].length) {
+			
+			for (int i = 0; i < m[0].length; i++) {
+				m[index][i] = array[i];
+			}
+			
+		}
+	}
+	
+	/**
+	 * Replace col into matrix.
+	 * 
+	 * @param m
+	 * @param array
+	 * @param index
+	 */
+	public static void insertCol(int[][] m, int[] array, int index) {
+		
+		if(index < m[0].length && index >= 0 && array.length == m.length) {
+			
+			for (int i = 0; i < m.length; i++) {
+				m[i][index] = array[i];
+			}
+		}
+		
+	}
 }

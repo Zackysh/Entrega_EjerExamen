@@ -246,5 +246,46 @@ public class Main {
 		Compute.reemplazarColumnaConArray(matrix, desiredCol, colIndex);
 
 		printMatrix(matrix);
+		
+		System.out.println("\nTesting: \"public static void insertRow(int[][] m, int[] array, int index)\"\n");
+		
+		System.out.println("Matrix");
+		
+		printMatrix(matrix);
+		
+		System.out.println("Desired index row: " + rowIndex);
+		
+		System.out.print("New row: ");
+		
+		int[] newRow = {9, 2, 6};
+		
+		printArray(newRow);
+		
+		Compute.insertRow(matrix, newRow, rowIndex);
+		
+		System.out.println("Final matrix:");
+		
+		printMatrix(matrix);
+		
+		System.out.println("\nTesting: \"public static void insertCol(int[][] m, int[] array, int index)\"\n");
+		
+		int[] newCol = {1, 6, 3};
+		
+		System.out.println("Current matrix:");
+		
+		printMatrix(matrix);
+		
+		System.out.println("Desired col index: " + colIndex);
+		
+		System.out.println("New col: (up - down)");
+		
+		printArray(newCol);
+		
+		Compute.insertCol(matrix, newCol, colIndex);
+		
+		System.out.println("Final matrix: ");
+		
+		printMatrix(matrix);
+		
 	}
 }
