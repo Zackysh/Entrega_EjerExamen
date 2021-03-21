@@ -30,6 +30,13 @@ public class PQUnitTests {
 	private static List<Integer> longList = new ArrayList<Integer>(); // used to exceed queue limit
 	private static List<Integer> emptyList = new ArrayList<Integer>();
 	
+	/**
+	 * Check if given punishmentQueue is sorted.
+	 * 
+	 * @param p
+	 * @returns true if it is sorted
+	 * @returns false if it is not sorted
+	 */
 	private boolean checkSortedList(PunishmentQueue<Integer> p) {
 		int aux = p.element();
 		for (Integer i : p) {
