@@ -14,6 +14,13 @@
   - Si tienes un usuario `root` sin contraseña, puedes continuar, sino crealo o introduce tus credenciales en `resources/application.properties`.
 
 - Ahora haz click derecho en `src/main/java/com.fav.shows.api/FavShowsApplication.java` , y ejecutalo como `Java Application` . No es necesario que uses Spring dev tools.
+- Por último, ejecuta esta consulta:
+
+```sql
+      USE favorites;
+      INSERT INTO `favorites`.`favorites_json`
+      (`favs_id`, `json`) VALUES (0, "[]");
+```
 
 ##### Arrancar cliente:
 
